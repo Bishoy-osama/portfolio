@@ -72,8 +72,8 @@ export const portfolioContent = {
       email: "bbishoyosama1@gmail.com",
       linkedin: "https://linkedin.com/in/bishoy-osama-fawzy",
       tryhackme: "https://tryhackme.com/p/bishop10",
-      github: "#",
-      githubPlaceholder: "[ADD LATER]",
+      github: "https://github.com/Bishoy-osama",
+      githubPlaceholder: "",
       cv: "/cv.pdf",
     },
   },
@@ -414,7 +414,7 @@ export const portfolioContent = {
     email: "bbishoyosama1@gmail.com",
     linkedin: "https://linkedin.com/in/bishoy-osama-fawzy",
     tryhackme: "https://tryhackme.com/p/bishop10",
-    githubUrl: "", // Rendered only when set
+    githubUrl: "https://github.com/Bishoy-osama",
   },
 
   footer: {
