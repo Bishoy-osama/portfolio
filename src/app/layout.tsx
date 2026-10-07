@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/data/content";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,12 +32,12 @@ export const metadata: Metadata = {
     "Freelance Security Tester",
     "Egypt",
   ],
-  metadataBase: new URL("https://bishoyosama.dev"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     title: "Bishoy Osama Fawzy | Junior Penetration Tester",
     description:
       "I find the weak spots in your website before attackers do. Web application penetration testing, plain-English reporting, and developer-friendly remediation.",
-    url: "https://bishoyosama.dev",
+    url: SITE_URL,
     siteName: "Bishoy Osama Fawzy Portfolio",
     locale: "en_US",
     type: "website",

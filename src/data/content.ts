@@ -1,3 +1,7 @@
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://portfolio-nu-two-qv5o8kefmb.vercel.app";
+
 export interface NavLink {
   label: string;
   href: string;
@@ -407,7 +411,7 @@ export const portfolioContent = {
       "Tell me about your site and I'll reply with what I can check and how. First basic check is free for sites you own or are authorized to test.",
     scopeNote:
       "The free check is passive and non-intrusive: security headers, TLS, cookie flags and exposed files, only on sites you own or are authorized to test.",
-    formspreeEndpoint: "", // Formspree endpoint URL if set, e.g. "https://formspree.io/f/xyz"
+    formspreeEndpoint: "https://formspree.io/f/xwlvlbpq",
     authorizedNote:
       "Authorized targets only. I'll ask for written permission before any testing.",
     replyTimeNote: "I usually reply within 24-48 hours.",

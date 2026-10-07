@@ -107,6 +107,7 @@ export default function Contact() {
             email: formData.email,
             websiteUrl: formData.websiteUrl,
             worriedAbout: formData.worriedAbout,
+            message: formData.worriedAbout,
           }),
         });
 

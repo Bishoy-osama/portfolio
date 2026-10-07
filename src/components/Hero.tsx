@@ -6,7 +6,7 @@ export default function Hero() {
   const { hero } = portfolioContent;
 
   return (
-    <section className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden border-b border-[#1E293B]/40">
+    <section id="hero" className="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden border-b border-[#1E293B]/40">
       {/* Subtle background glow */}
       <div
         className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[320px] bg-[#2DD4BF]/5 rounded-full blur-[140px] pointer-events-none"

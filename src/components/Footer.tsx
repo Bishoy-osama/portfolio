@@ -115,7 +115,7 @@ export default function Footer() {
               <FileText className="w-4 h-4" />
             </a>
             <a
-              href="#"
+              href="#hero"
               className="p-2 rounded bg-[#111720] border border-[#1E293B] hover:text-[#2DD4BF] hover:border-[#2DD4BF]/50 transition-colors ml-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]"
               aria-label="Scroll back to top of page"
             >
