@@ -6,9 +6,10 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data:;
   font-src 'self';
+  connect-src 'self' https://formspree.io;
   object-src 'none';
   base-uri 'self';
-  form-action 'self';
+  form-action 'self' https://formspree.io;
   frame-ancestors 'none';
   upgrade-insecure-requests;
 `
