@@ -61,7 +61,7 @@ export default function Services() {
 
         {/* "What you receive" Strip */}
         <SectionReveal delay={0.1}>
-          <div className="bg-[#111720] border border-[#1E293B] rounded-xl p-5 sm:p-6 mb-6">
+          <div className="bg-[#111720] border border-[#1E293B] rounded-xl p-5 sm:p-6 mb-3">
             <div className="flex flex-col md:flex-row md:items-center gap-4">
               <div className="md:border-r md:border-[#1E293B] md:pr-6 shrink-0">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-[#2DD4BF] block font-semibold">
@@ -85,6 +85,9 @@ export default function Services() {
               </div>
             </div>
           </div>
+          <p className="text-xs text-[#CBD5E1] font-mono mb-6 px-1">
+            {servicesSection.scopeLine || "Scope and timeline are agreed with you in writing before any testing starts."}
+          </p>
         </SectionReveal>
 
         {/* Authorization Note + Subtle CTA */}

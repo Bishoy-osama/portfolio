@@ -33,6 +33,9 @@ export const metadata: Metadata = {
     "Egypt",
   ],
   metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     title: "Bishoy Osama Fawzy | Junior Penetration Tester",
     description:
@@ -46,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bishoy Osama Fawzy | Junior Penetration Tester",
     description:
-      "I find the weak spots in your website before attackers do. Web application penetration testing and custom Python security automation.",
+      "I find the weak spots in your website before attackers do. Web application penetration testing, plain-English reporting, and developer-friendly remediation.",
   },
   robots: {
     index: true,

@@ -144,7 +144,7 @@ export default function Contact() {
         <SectionReveal>
           <div className="mb-12">
             <span className="text-xs font-mono text-[#2DD4BF] uppercase tracking-wider block mb-2">
-              08 // Contact & Free Assessment
+              09 // Contact & Free Assessment
             </span>
             <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[#F1F5F9] mb-3">
               {contact.heading}
@@ -188,7 +188,7 @@ export default function Contact() {
                         Send me a message and I&apos;ll reply personally.
                       </p>
                       <p className="text-xs font-mono text-[#CBD5E1]">
-                        Direct assessment & inquiry line
+                        Contact details
                       </p>
                     </div>
                   </div>

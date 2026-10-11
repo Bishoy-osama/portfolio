@@ -27,7 +27,7 @@ export default function Projects() {
             Offensive Security Work & Tooling
           </h2>
           <p className="text-sm sm:text-base text-[#CBD5E1] max-w-2xl">
-            Real freelance automation pipelines, cryptography utilities, and security research.
+            Freelance and personal security projects.
           </p>
         </SectionReveal>
 
@@ -39,13 +39,15 @@ export default function Projects() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-5 border-b border-[#1E293B]">
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-2">
-                    <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/20 font-medium">
-                      {flagship.badge}
-                    </span>
+                    {flagship.badge && (
+                      <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/20 font-medium">
+                        {flagship.badge}
+                      </span>
+                    )}
                     {flagship.typeTags?.map((tag, idx) => (
                       <span
                         key={idx}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#0B0F14] border border-[#1E293B] text-[#CBD5E1]"
+                        className="text-[11px] font-mono px-2.5 py-0.5 rounded bg-[#0B0F14] border border-[#1E293B] text-[#CBD5E1]"
                       >
                         {tag}
                       </span>

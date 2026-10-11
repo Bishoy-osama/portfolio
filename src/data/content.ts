@@ -88,6 +88,7 @@ export const portfolioContent = {
       { label: "Projects", href: "#projects" },
       { label: "Skills", href: "#skills" },
       { label: "Process", href: "#process" },
+      { label: "Experience", href: "#experience" },
       { label: "About", href: "#about" },
       { label: "Contact", href: "#contact" },
     ],
@@ -118,6 +119,11 @@ export const portfolioContent = {
       {
         text: "TryHackMe Top 8%",
         href: "https://tryhackme.com/p/bishop10",
+        isExternal: true,
+      },
+      {
+        text: "GitHub Profile",
+        href: "https://github.com/Bishoy-osama",
         isExternal: true,
       },
       {
@@ -158,7 +164,7 @@ export const portfolioContent = {
           "Recon-to-scan automation pipelines (like my automated recon and exploitation tool)",
           "AI-assisted testing agents and automated HTML reports",
           "Hashing / cryptography utilities",
-          "Repetitive-task automation",
+          "Custom scripts that automate repeated security checks",
         ],
       },
     ],
@@ -169,6 +175,8 @@ export const portfolioContent = {
       "Fix recommendations for developers",
       "A short walkthrough call",
     ],
+    scopeLine:
+      "Scope and timeline are agreed with you in writing before any testing starts.",
     authorizationNote:
       "I only test systems I'm explicitly authorized to test, and I keep your data confidential.",
     subtleCta: {
@@ -197,9 +205,8 @@ export const portfolioContent = {
     {
       id: "flagship-recon-scanner",
       title: "Automated Recon and Exploitation Tool",
-      typeTags: ["Python", "2026"],
+      typeTags: ["Freelance project", "Private", "Python", "2026"],
       isFlagship: true,
-      badge: "Freelance project · Private",
       description:
         "A modular Python tool that turns the usual manual, multi-tool bug bounty workflow into a single-command pipeline, from subdomain enumeration through vulnerability scanning.",
       confidentialNote:
@@ -403,6 +410,39 @@ export const portfolioContent = {
         "Intro to AI",
       ],
     },
+  },
+
+  faq: {
+    sectionNumber: "08",
+    title: "Common Questions",
+    subtitle: "Clear answers on deliverables, safety, authorization, and process.",
+    items: [
+      {
+        question: "What do I get?",
+        answer:
+          "A plain-English summary, findings ranked by risk, evidence and reproduction steps, fix recommendations for your developers, and a short walkthrough call.",
+      },
+      {
+        question: "Will testing break my website?",
+        answer:
+          "I use careful, non-destructive testing and agree the scope with you first. I only test what you authorize.",
+      },
+      {
+        question: "How does authorization work?",
+        answer:
+          "Before any testing I ask for written permission that lists exactly what I may test. I don't test anything without it.",
+      },
+      {
+        question: "What does the free check include?",
+        answer:
+          "A passive check of security headers, TLS, cookie flags and exposed files, only on sites you own or are authorized to test.",
+      },
+      {
+        question: "How is my data handled?",
+        answer:
+          "Your information stays confidential and is used only for the assessment.",
+      },
+    ],
   },
 
   contact: {

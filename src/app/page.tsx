@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import SkillsAndTools from "@/components/SkillsAndTools";
 import HowIWork from "@/components/HowIWork";
 import ExperienceAndTraining from "@/components/ExperienceAndTraining";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -42,7 +43,10 @@ export default function Home() {
         {/* 9. Experience & Training */}
         <ExperienceAndTraining />
 
-        {/* 10. Contact */}
+        {/* 10. FAQ */}
+        <FAQ />
+
+        {/* 11. Contact */}
         <Contact />
       </main>
 

@@ -48,14 +48,9 @@ export default function FeaturedCaseStudy() {
               </div>
 
               <div className="space-y-3">
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#F1F5F9] tracking-tight">
-                    {caseStudy.inProgressCard.title}
-                  </h3>
-                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#2DD4BF]/10 text-[#2DD4BF] border border-[#2DD4BF]/20">
-                    {caseStudy.tag}
-                  </span>
-                </div>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#F1F5F9] tracking-tight">
+                  {caseStudy.inProgressCard.title}
+                </h3>
 
                 <p className="text-sm sm:text-base text-[#CBD5E1] leading-relaxed max-w-2xl">
                   {caseStudy.inProgressCard.description}
