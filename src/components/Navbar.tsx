@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight, FileText } from "lucide-react";
 import { portfolioContent } from "@/data/content";
@@ -22,24 +22,106 @@ function GithubIcon({ className }: { className?: string }) {
   );
 }
 
+// Section IDs corresponding to the navbar links
+const NAV_SECTION_IDS = [
+  "about",
+  "services",
+  "projects",
+  "skills",
+  "process",
+  "experience",
+  "contact",
+];
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const isClickScrollingRef = useRef(false);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { nav, personal } = portfolioContent;
 
   useEffect(() => {
+    // 1. Navbar blur background on scroll + check bottom of page
     const handleScroll = () => {
       if (window.scrollY > 20) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+
+      // Check if user scrolled to the very bottom
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 30;
+
+      if (atBottom && !isClickScrollingRef.current) {
+        setActiveSection("contact");
+      } else if (window.scrollY < 120 && !isClickScrollingRef.current) {
+        // In the hero at the top, clear active highlight
+        setActiveSection(null);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // 2. IntersectionObserver for scroll-spy highlighting
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      if (isClickScrollingRef.current) return;
+
+      // Filter intersecting entries
+      const visible = entries.filter((entry) => entry.isIntersecting);
+      if (visible.length === 0) return;
+
+      // Pick the most prominent visible section
+      const topEntry = visible.reduce((prev, curr) =>
+        curr.intersectionRatio > prev.intersectionRatio ? curr : prev
+      );
+
+      const targetId = topEntry.target.id;
+      if (NAV_SECTION_IDS.includes(targetId)) {
+        setActiveSection(targetId);
+      }
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: "-40% 0px -55% 0px",
+      threshold: [0, 0.2, 0.5, 0.8, 1],
+    });
+
+    NAV_SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    };
   }, []);
 
   const closeMenu = () => setMobileMenuOpen(false);
+
+  const handleLinkClick = (href: string) => {
+    closeMenu();
+    const sectionId = href.replace("#", "");
+
+    if (sectionId === "hero" || href === "#") {
+      setActiveSection(null);
+      return;
+    }
+
+    if (NAV_SECTION_IDS.includes(sectionId)) {
+      setActiveSection(sectionId);
+      isClickScrollingRef.current = true;
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+      // Disable observer overwrite during the smooth scroll transition (~800ms)
+      clickTimeoutRef.current = setTimeout(() => {
+        isClickScrollingRef.current = false;
+      }, 850);
+    }
+  };
 
   return (
     <header
@@ -53,6 +135,7 @@ export default function Navbar() {
         {/* Left: Wordmark with teal dot scrolling to top */}
         <Link
           href="#hero"
+          onClick={() => handleLinkClick("#hero")}
           className="flex items-center gap-2 group text-base font-semibold tracking-tight text-[#F1F5F9] hover:text-white transition-colors shrink-0"
           aria-label="Bishoy Osama Homepage - Scroll to top"
         >
@@ -68,15 +151,35 @@ export default function Navbar() {
           className="hidden md:flex items-center gap-5 lg:gap-7 text-sm font-medium text-[#94A3B8]"
           aria-label="Main Navigation"
         >
-          {nav.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="hover:text-[#F1F5F9] transition-colors focus-visible:outline-none focus-visible:text-[#2DD4BF] whitespace-nowrap"
-            >
-              {link.label}
-            </a>
-          ))}
+          {nav.links.map((link) => {
+            const sectionId = link.href.replace("#", "");
+            const isActive = activeSection === sectionId;
+
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => handleLinkClick(link.href)}
+                aria-current={isActive ? "location" : undefined}
+                className={`relative py-1 transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:text-[#2DD4BF] ${
+                  isActive
+                    ? "text-[#2DD4BF] font-semibold"
+                    : "text-[#94A3B8] hover:text-[#F1F5F9]"
+                }`}
+              >
+                <span>{link.label}</span>
+                {/* 2px teal underline active indicator with smooth transition, respects prefers-reduced-motion */}
+                <span
+                  className={`absolute left-0 bottom-0 w-full h-[2px] bg-[#2DD4BF] rounded-full motion-safe:transition-all motion-safe:duration-200 ${
+                    isActive
+                      ? "opacity-100 scale-x-100"
+                      : "opacity-0 scale-x-0 pointer-events-none"
+                  }`}
+                  aria-hidden="true"
+                />
+              </a>
+            );
+          })}
         </nav>
 
         {/* Right Desktop CTA Buttons + GitHub icon */}
@@ -102,6 +205,7 @@ export default function Navbar() {
           </a>
           <a
             href={nav.ctaPrimary.href}
+            onClick={() => handleLinkClick(nav.ctaPrimary.href)}
             className="inline-flex items-center gap-1.5 px-3.5 lg:px-4 py-2 text-xs font-medium text-[#0B0F14] bg-[#2DD4BF] hover:bg-[#2DD4BF]/90 rounded-md font-semibold transition-all shadow-sm hover:shadow-[#2DD4BF]/20 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0F14]"
           >
             {nav.ctaPrimary.label}
@@ -125,16 +229,32 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#0B0F14]/95 backdrop-blur-xl border-b border-[#1E293B] px-6 py-6 transition-all duration-300">
           <nav className="flex flex-col gap-4 text-base font-medium text-[#94A3B8]">
-            {nav.links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={closeMenu}
-                className="py-1 hover:text-[#2DD4BF] transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+            {nav.links.map((link) => {
+              const sectionId = link.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => handleLinkClick(link.href)}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`relative py-1 transition-colors flex items-center justify-between ${
+                    isActive
+                      ? "text-[#2DD4BF] font-semibold"
+                      : "text-[#94A3B8] hover:text-[#F1F5F9]"
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {isActive && (
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-[#2DD4BF]"
+                      aria-hidden="true"
+                    />
+                  )}
+                </a>
+              );
+            })}
             <div className="pt-4 mt-2 border-t border-[#1E293B] flex flex-col gap-3">
               <a
                 href={nav.ctaSecondary.href}
@@ -147,7 +267,7 @@ export default function Navbar() {
               </a>
               <a
                 href={nav.ctaPrimary.href}
-                onClick={closeMenu}
+                onClick={() => handleLinkClick(nav.ctaPrimary.href)}
                 className="flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-[#0B0F14] bg-[#2DD4BF] rounded-md"
               >
                 {nav.ctaPrimary.label}
